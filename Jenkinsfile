@@ -33,7 +33,7 @@ pipeline {
         }
     }
 
-    /*post {
+    post {
         always {
             echo 'Publishing HTML Report'
             publishHTML(target: [
@@ -51,7 +51,7 @@ pipeline {
         failure {
             echo 'Pipeline failed.'
         }
-    }*/
+    }
     
     post {
         always {
