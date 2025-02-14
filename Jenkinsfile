@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Installing npm ci...') {
+        stage('Installing npm ci with dependencies...') {
             steps {
                 sh '''
                     # Install NPM packages
@@ -22,9 +22,14 @@ pipeline {
 
                     # Install Playwright browsers and dependencies
                     npx playwright install --with-deps
+                '''
+            }
+        }
 
-                    # Run a test
-                    npx playwright test
+        stage('Run test...'){
+            steps {
+                sh'''
+                npx playwright test --reporter=html
                 '''
             }
         }
