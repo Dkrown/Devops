@@ -26,7 +26,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
-                    npx playwright test --project=firefox --reporter=html
+                    npx playwright test --reporter=html
                 '''
             }
         }
@@ -38,7 +38,7 @@ pipeline {
         }
     }
 
-    /*post {
+    post {
         always {
             echo 'Publishing HTML Report'
             publishHTML(target: [
@@ -50,9 +50,15 @@ pipeline {
                 reportName           : 'Playwright Test Report'
             ])
         }
-    }*/
+        success {
+            echo 'Pipeline succeeded.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
     
-    post {
+    /*post {
         always {
             echo 'Pipeline completed.'
         }
@@ -62,5 +68,5 @@ pipeline {
         failure {
             echo 'Pipeline failed.'
         }
-    }
+    }*/
 }
