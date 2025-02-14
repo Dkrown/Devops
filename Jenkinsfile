@@ -15,30 +15,24 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        /*stage('Install Dependencies') {
             steps {
                 sh '''
                     npx playwright install-deps
                 '''
             }
-        }
+        }*/
 
         stage('Run Tests') {
             steps {
                 sh '''
-                    npx playwright test --reporter=html
+                    npx playwright test
                 '''
-            }
-        }
-
-        stage('Publish Report') {
-            steps {
-                archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true, onlyIfSuccessful: true
             }
         }
     }
 
-    post {
+    /*post {
         always {
             echo 'Publishing HTML Report'
             publishHTML(target: [
@@ -56,9 +50,9 @@ pipeline {
         failure {
             echo 'Pipeline failed.'
         }
-    }
+    }*/
     
-    /*post {
+    post {
         always {
             echo 'Pipeline completed.'
         }
@@ -68,5 +62,5 @@ pipeline {
         failure {
             echo 'Pipeline failed.'
         }
-    }*/
+    }
 }
