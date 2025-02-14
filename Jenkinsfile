@@ -1,28 +1,34 @@
 pipeline {
     agent {
         docker {
-            image 'mcr.microsoft.com/playwright:v1.40.0-jammy'  // Replace with your desired Playwright image
+            image 'mcr.microsoft.com/playwright:v1.50.1-jammy'  // Replace with your desired Playwright image
             args '-u root' // or 'user abc:abc' if you need a specific user
         }
     }
 
     stages {
-        stage('Hello') {
+        stage('eKROWN Technologies Lab') {
             steps {
-                echo 'Hello World'
+                sh '''
+                    echo 'Hello, from eKROWN Engineers!'
+                '''
             }
         }
 
-        stage('Install Dependencies') {
+        /*stage('Install Dependencies') {
             steps {
-                sh 'npm install playwright'
-                sh 'npx playwright install'
+                sh '''
+                    npm install playwright
+                    npx playwright install
+                '''
             }
-        }
+        }*/
 
         stage('Run Tests') {
             steps {
-                sh 'npx playwright test --reporter=html'
+                sh '''
+                    npx playwright test --project=firefox --reporter=html
+                '''
             }
         }
 
@@ -33,7 +39,7 @@ pipeline {
         }
     }
 
-    post {
+    /*post {
         always {
             echo 'Publishing HTML Report'
             publishHTML(target: [
@@ -44,6 +50,18 @@ pipeline {
                 reportFiles          : 'index.html',
                 reportName           : 'Playwright Test Report'
             ])
+        }
+    }*/
+    
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline succeeded.'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
