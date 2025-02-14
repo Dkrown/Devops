@@ -35,7 +35,8 @@ pipeline {
 
     post {
         always {
-            echo 'Publishing HTML Report'
+            echo 'Publishing HTML and JUnit Reports'
+            junit 'jest-results/junit.xml'
             publishHTML(target: [
                 allowMissing         : false,
                 alwaysLinkToLastBuild: false,
