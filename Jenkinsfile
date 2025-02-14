@@ -5,9 +5,6 @@ pipeline {
             args '-u root' // or 'user abc:abc' if you need a specific user
         }
     }
-    options {
-        cleanWs()
-    }
 
     stages {
         stage('eKROWN Technologies Lab') {
