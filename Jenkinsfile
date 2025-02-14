@@ -15,9 +15,10 @@ pipeline {
             }
         }
 
-        /*stage('Install Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 sh '''
+                    npm ci 
                     npx playwright install-deps
                 '''
             }
@@ -29,7 +30,7 @@ pipeline {
                     npx playwright test
                 '''
             }
-        }*/
+        }
     }
 
     /*post {
