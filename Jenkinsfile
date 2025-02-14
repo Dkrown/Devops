@@ -15,13 +15,13 @@ pipeline {
             }
         }
 
-        /*stage('Install Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 sh '''
                     npx playwright install-deps
                 '''
             }
-        }*/
+        }
 
         stage('Run Tests') {
             steps {
