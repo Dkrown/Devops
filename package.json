@@ -1,0 +1,23 @@
+{
+  "name": "devops",
+  "version": "1.0.0",
+  "description": "This repo is for experimenting with Jenkins pipelines as infrastruture as a code.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dkrown/Devops.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dkrown/Devops/issues"
+  },
+  "homepage": "https://github.com/Dkrown/Devops#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.50.1"
+  }
+}
