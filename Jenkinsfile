@@ -1,50 +1,49 @@
 pipeline {
     agent {
         docker {
-            image 'mcr.microsoft.com/playwright:v1.50.0-noble'
-            args '-u root'
+            image 'mcr.microsoft.com/playwright:v1.40.0-jammy'  // Replace with your desired Playwright image
+            args '-u root' // or 'user abc:abc' if you need a specific user
         }
     }
 
     stages {
-        stage('Hello, from eKROWN!') {
+        stage('Hello') {
             steps {
-                sh '''
-                    echo 'eKROWN Devops-Engineers Lab.'
-                '''
+                echo 'Hello World'
             }
         }
 
-        stage('Installing npm ci with dependencies...') {
+        stage('Install Dependencies') {
             steps {
-                sh '''
-                    # Install NPM packages
-                    npm ci
-
-                    # Install Playwright browsers and dependencies
-                    npx playwright install --with-deps
-                '''
+                sh 'npm install playwright'
+                sh 'npx playwright install'
             }
         }
 
-        stage('Run test...'){
+        stage('Run Tests') {
             steps {
-                sh'''
-                npx playwright test --reporter=html
-                '''
+                sh 'npx playwright test --reporter=html'
+            }
+        }
+
+        stage('Publish Report') {
+            steps {
+                archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true, onlyIfSuccessful: true
             }
         }
     }
+
     post {
         always {
-            /*junit 'jest-results/junit.xml'*/
-            echo 'Pipeline completed.'
-        }
-        success {
-            echo 'Pipeline succeeded.'
-        }
-        failure {
-            echo 'Pipeline failed.'
+            echo 'Publishing HTML Report'
+            publishHTML(target: [
+                allowMissing         : false,
+                alwaysLinkToLastBuild: false,
+                keepAll             : true,
+                reportDir            : 'playwright-report',
+                reportFiles          : 'index.html',
+                reportName           : 'Playwright Test Report'
+            ])
         }
     }
 }
