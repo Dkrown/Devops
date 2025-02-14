@@ -1,10 +1,13 @@
-// playwright.config.js
-const { defineConfig } = require('@playwright/test');
+// tests/labtest1.spec.js
+const { test, expect } = require('@playwright/test');
 
-module.exports = defineConfig({
-  testDir: './tests',  // Or './e2e', './src/tests', or wherever your tests are
-  reporter: 'html', // Enable the HTML reporter
-  use: {
-    baseURL: 'http://localhost:3000', // Replace with the base URL of your app (if applicable)
-  },
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+  await page.getByRole('link', { name: 'Get started' }).click();
+  await expect(page).toHaveURL(/.*intro/);
 });
