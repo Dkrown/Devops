@@ -1,3 +1,7 @@
+environment {
+    DOCKER_HOST = "tcp://docker-dind:2375"
+}
+
 pipeline {
     agent {
         docker {
